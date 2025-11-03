@@ -1,0 +1,598 @@
+:root {
+    /* Light Mode Colors */
+    --primary-color: #6c5ce7;
+    --secondary-color: #f0e4cc; /* Light background */
+    --accent-color: #7a49bd;
+    --bg-color: #ffffff; /* Light mode background */
+    --text-color: #333333; /* Light mode text color */
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+    --link-hover-color: #8f0a1a;
+}
+
+.dark-mode {
+    /* Dark Mode Colors */
+    --primary-color: #6c5ce7;
+    --secondary-color: #2f343a;
+    --accent-color: #7a49bd;
+    --bg-color: #1a1d23; /* Dark mode background */
+    --text-color: #f7f7f7; /* Dark mode text color */
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.2rem; /* Base font size */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+}
+
+/* Header */
+.header-bar {
+    background: linear-gradient(135deg, var(--primary-color), #004494);
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 60px;
+    box-shadow: var(--shadow);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    padding: 8px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    margin-right: 10px;
+    transition: border-color var(--transition-speed);
+}
+
+.search-bar:focus {
+    border-color: #004494;
+    outline: none;
+}
+
+.search-icon {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: color var(--transition-speed);
+}
+
+.search-icon:hover {
+    color: var(--link-hover-color); /* Change color on hover */
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid var(--accent-color); /* Add border around profile image */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 60px; /* Width when collapsed */
+    background-color: var(--primary-color);
+    color: white;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 70px; /* Spacing for header */
+    transition: width var(--transition-speed);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    font-size: 1.1rem; /* Slightly increased font size */
+}
+
+.sidebar.expanded {
+    width: 220px; /* Width when expanded */
+}
+
+.menu-item {
+    padding: 12px 10px; /* Padding for better spacing */
+    transition: background-color var(--transition-speed);
+    line-height: 1.5; /* Increased line height for better readability */
+    position: relative; /* Position for tooltip */
+    display: flex; /* Use flex to align icon and text */
+    align-items: center; /* Center vertically */
+}
+
+.menu-item span {
+    margin-left: 10px; /* Space between icon and text */
+    display: none; /* Hide text by default */
+    color: white; /* Ensure text color is white */
+}
+
+.menu-item:hover {
+    background-color: #004494; /* Change background on hover */
+}
+
+/* Show text when sidebar is expanded */
+.sidebar.expanded .menu-item span {
+    display: inline; /* Show text when expanded */
+}
+
+/* Description card */
+.description-card {
+    display: none; /* Hide by default */
+    position: absolute;
+    left: 100%; /* Position to the right of the menu item */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    background-color: #333; /* Dark background */
+    color: #fff; /* White text */
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px; /* Set a fixed width */
+    z-index: 10; /* Ensure it appears above other elements */
+    box-shadow: var(--shadow); /* Add shadow for depth */
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.3s ease; /* Smooth fade in */
+}
+
+/* Show the description card on hover */
+.menu-item:hover .description-card {
+    display: block; /* Show on hover */
+    opacity: 1; /* Fade in */
+}
+
+/* Main Container */
+.dashboard {
+    margin-left: 60px; /* Adjusted margin for the sidebar when collapsed */
+    padding: 4rem 1.5rem 3.5rem;
+    max-width: calc(100% - 60px); /* Ensure it doesn't exceed available width */
+    margin: auto;
+    flex-grow: 1;
+    transition: margin-left var(--transition-speed) ease-in-out; /* Smooth transition */
+}
+
+/* Adjusted dashboard margin for expanded sidebar */
+.sidebar.expanded + .dashboard {
+    margin-left: 220px; /* Margin when sidebar is expanded */
+    max-width: calc(100% - 220px); /* Ensure it doesn't exceed available width */
+}
+
+/* Welcome Card */
+.welcome-card {
+    background-color: var(--secondary-color); /* Dark background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.welcome-card h1 {
+    margin-left: 20px;
+}
+
+/* Course Card */
+.course-card {
+    background-color: var(--secondary-color); /* Dark background of the card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: var(--shadow); /* Subtle shadow for depth */
+    padding: 20px; /* Padding inside the card */
+    margin-bottom: 20px; /* Space between cards */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transform and shadow on hover */
+}
+
+.course-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.course-card h2 {
+    font-size: 1.5rem; /* Size of the course title */
+    margin-bottom: 10px; /* Space below the title */
+}
+
+.course-card a {
+    text-decoration: none; /* Remove underline from links */
+    color: var(--primary-color); /* Link color */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.course-card a:hover {
+    color: var(--link-hover-color); /* Change color on hover */
+}
+
+.progress-bar {
+    width: 100%; /* Full width */
+    background-color: #444; /* Dark gray background */
+    border-radius: 5px; /* Rounded corners */
+    overflow: hidden; /* Hide overflow */
+    margin: 10px 0; /* Space above and below the progress bar */
+}
+
+.progress {
+    color: white; /* Text color inside the progress bar */
+    text-align: center; /* Center text */
+    padding: 2px 0; /* Padding around text */
+    background-color: var(--primary-color); /* Progress color */
+    transition: width var(--transition-speed); /* Smooth transition for progress */
+}
+
+/* Footer */
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    margin-top: auto;
+    font-size: 0.9rem;
+}
+
+/* Icon and Link Styling */
+.menu-item a {
+    color: white; /* Icon color */
+    text-decoration: none; /* Remove underline */
+    display: flex; /* Flex to align icon and text */
+    align-items: center; /* Center vertically */
+    width: 100%; /* Make link cover the entire menu item */
+}
+
+.menu-item a i {
+    font-size: 1.25rem; /* Icon size */
+    margin-right: 10px; /* Space between icon and text */
+}
+
+/* Buttons */
+.btn {
+    padding: 0.5rem 1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed), transform 0.2s;
+}
+
+.btn:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.btn-info {
+    background-color: #007bff;
+}
+
+.btn-info:hover {
+    background-color: #0056b3;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    box-shadow: var(--shadow);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    font-size: 1rem;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 2px solid #0069d9;
+}
+
+td {
+    background-color: var(--secondary-color); /* Dark background for table cells */
+    color: var(--text-color);
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) td {
+    background-color: #3a3f43; /* Slightly lighter dark for even rows */
+}
+
+tr:hover td {
+    background-color: #444; /* Highlight on hover */
+}
+
+/* Hamburger Icon */
+.toggle-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.5rem; /* Size of the hamburger icon */
+    transition: color var(--transition-speed);
+}
+
+.toggle-btn:hover {
+    color: var(--link-hover-color); /* Change color on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-bar {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .search-container {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .search-bar {
+        width: 90%;
+    }
+
+    .profile-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sidebar {
+        width: 60px; /* Collapsed width for mobile */
+    }
+
+    .sidebar.expanded {
+        width: 100%; /* Full width when expanded on mobile */
+    }
+
+    .dashboard {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    /* Adjust icon size for mobile */
+    .header-bar .logo i,
+    .sidebar .menu-item a i {
+        font-size: 1rem; /* Keep original icon size */
+    }
+}
+
+/* Form Group Styling */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Reduced spacing */
+    margin-bottom: 0; /* No space between form groups */
+}
+
+.form-group label {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: var(--secondary-color); /* Dark background */
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    background-color: #444; /* Darker background on focus */
+    outline: none;
+}
+
+.form-group input::placeholder,
+.form-group select::placeholder,
+.form-group textarea::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+.form-group input[type="submit"] {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+}
+
+.form-group input[type="submit"]:hover {
+    background-color: #005b6b;
+    transform: translateY(-2px);
+}
+
+.form-group .file-input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    background-color: var(--secondary-color); /* Dark background */
+}
+
+.form-group .file-input:hover {
+    background-color: #444; /* Slightly lighter on hover */
+}
+
+.form-group .error-message {
+    color: #dc3545; /* Red for error message */
+    font-size: 0.9rem;
+}
+
+/* Profile Image Container */
+.profile-image-container {
+    width: 50px;      /* Fixed width */
+    height: 50px;     /* Fixed height */
+    border-radius: 50%; /* Circular shape */
+    overflow: hidden;   /* Hide overflow if image doesn't fit */
+    border: 3px solid #ddd; /* Optional border around the image */
+}
+
+/* Profile Image */
+.profile-image-container img {
+    width: 50px;      /* Fixed width */
+    height: 50px; 
+}
+
+fieldset {
+    border: 2px solid var(--primary-color); /* Border color */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the fieldset */
+    margin: 20px 0; /* Margin above and below the fieldset */
+    background-color: var(--secondary-color); /* Dark background color */
+    box-shadow: var(--shadow); /* Subtle shadow for depth */
+}
+
+fieldset legend {
+    font-weight: bold; /* Bold legend text */
+    color: var(--primary-color); /* Color that matches the border */
+    padding: 0 10px; /* Padding around legend */
+    font-size: 1.2rem; /* Slightly larger font size for legend */
+}
+
+.sidebar:hover {
+    width: 220px;
+}
+
+.sidebar:hover .menu-item span {
+    display: inline;
+}
+
+.menu-item {
+    padding: 12px 10px;
+    transition: background-color var(--transition-speed);
+    line-height: 1.5;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.menu-item:hover {
+    background-color: #004494;
+}
+
+.menu-item span {
+    margin-left: 10px;
+    display: none;
+}
+
+.sidebar:hover .menu-item span {
+    display: inline;
+}
+
+.menu-item:hover .description-card {
+    display: block;
+    opacity: 1;
+}
+
+/* Ensure description card appears when hovering over the icon */
+.menu-item i:hover + .description-card {
+    display: block;
+    opacity: 1;
+}
+
+/* Course Card Styles */
+.course-card {
+    background-color: var(--secondary-color); /* Dark background of the card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: var(--shadow); /* Subtle shadow for depth */
+    padding: 20px; /* Padding inside the card */
+    margin-bottom: 20px; /* Space between cards */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transform and shadow on hover */
+}
+
+.course-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.course-card h2 {
+    font-size: 1.5rem; /* Size of the course title */
+    margin-bottom: 10px; /* Space below the title */
+}
+
+.course-card a {
+    text-decoration: none; /* Remove underline from links */
+    color: var(--primary-color); /* Link color */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.course-card a:hover {
+    color: var(--link-hover-color); /* Change color on hover */
+}
+
+.progress-bar {
+    width: 100%; /* Full width */
+    background-color: #444; /* Dark gray background */
+    border-radius: 5px; /* Rounded corners */
+    overflow: hidden; /* Hide overflow */
+    margin: 10px 0; /* Space above and below the progress bar */
+}
+
+.progress {
+    color: white; /* Text color inside the progress bar */
+    text-align: center; /* Center text */
+    padding: 2px 0; /* Padding around text */
+    background-color: var(--primary-color); /* Progress color */
+    transition: width var(--transition-speed); /* Smooth transition for progress */
+}

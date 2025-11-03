@@ -1,0 +1,422 @@
+:root {
+    --primary-color: #66CCCC;
+    --secondary-color: #F5F5DC;
+    --accent-color: #9CD8F4;
+    --bg-color: #F0E4CC;
+    --text-color: #333;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+    --link-hover-color: #dc3545;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.2rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-bar {
+    background: linear-gradient(135deg, var(--primary-color), #004494);
+    color: white;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 60px;
+    box-shadow: var(--shadow);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 200px;
+    background-color: var(--primary-color);
+    color: white;
+    height: calc(100vh - 60px); /* Adjust for header height */
+    position: fixed;
+    top: 60px;
+    left: 0;
+    padding-top: 0;
+    transform: translateX(-100%);
+    transition: transform var(--transition-speed);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    font-size: 1.2rem;
+}
+
+/* Sidebar visible when hovered */
+.sidebar:hover,
+.sidebar.active {
+    transform: translateX(0);
+}
+
+/* Sidebar hides when not hovered and no active class */
+.sidebar:not(:hover):not(.active) {
+    transform: translateX(-100%);
+}
+
+/* Hamburger Button */
+.hamburger-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.menu-item {
+    padding: 8px;
+}
+
+.menu-item a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.menu-item a:hover {
+    background-color: #004494;
+}
+
+.container {
+    margin-left: 200px;
+    padding: 4.5rem 1.5rem 3.5rem;
+    max-width: 1000px;
+    flex-grow: 1;
+    transition: margin-left var(--transition-speed);
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px; /* Increased */
+    background-color: white;
+}
+
+legend {
+    font-weight: bold;
+    font-size: 1.2rem; /* Increased */
+    padding: 0 10px;
+}
+
+.btn {
+    padding: 0.7rem 1.2rem; /* Increased */
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem; /* Increased */
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    background-color: #004494;
+    transform: translateY(0);
+}
+
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 5px;
+    position: relative;
+    width: 100%;
+    margin-top: auto;
+    font-size: 0.9rem; /* Increased */
+    transition: all 0.3s ease-in-out;
+}
+
+.alert {
+    margin: 1rem 0;
+    padding: 0.6rem;
+    font-size: 1rem; /* Increased */
+    border-radius: 5px;
+}
+
+/* Hide sidebar when clicking outside */
+.hidden {
+    transform: translateX(-100%) !important;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 160px;
+    }
+
+    .container {
+        margin-left: 0;
+        padding: 1.2rem;
+    }
+
+    .header-bar {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .logo {
+        font-size: 1.2rem; /* Increased */
+    }
+
+    .menu-item a {
+        font-size: 0.9rem; /* Increased */
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    box-shadow: var(--shadow);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    font-size: 1rem; /* Increased */
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 2px solid #0069d9;
+}
+
+td {
+    background-color: #f9f9f9;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) td {
+    background-color: #f1f1f1;
+}
+
+tr:hover td {
+    background-color: #e2f2ff;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1.1rem; /* Increased */
+    transition: color var(--transition-speed);
+}
+
+a:hover {
+    color: var(--link-hover-color);
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem; /* Increased */
+    color: white;
+    cursor: pointer;
+}
+
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-left: 20px; /* Space from the logo */
+}
+
+.search-bar {
+    padding: 8px 12px; /* Increased padding for better usability */
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    width: 250px; /* Set a fixed width */
+    font-size: 1rem; /* Increased font size */
+    transition: border-color var(--transition-speed);
+}
+
+.search-bar:focus {
+    outline: none; /* Remove default outline */
+    border-color: #004494; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(0, 68, 148, 0.5); /* Add shadow effect */
+}
+
+.search-icon {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px; /* Match padding with search bar */
+    cursor: pointer;
+    margin-left: 5px; /* Space between input and button */
+    transition: background-color var(--transition-speed);
+}
+
+.search-icon:hover {
+    background-color: #0056b3; /* Darken on hover */
+}
+
+.question-input {
+    margin-bottom: 10px;
+}
+
+textarea,
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background-color: white;
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal button {
+    margin: 10px;
+    padding: 8px 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.modal button:hover {
+    background-color: #0056b3;
+}
+
+.modal.active {
+    display: block;
+    opacity: 1;
+}
+
+.add-question-btn {
+    padding: 12px 24px; /* Slightly larger padding */
+    background-color: #007bff; /* Primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem; /* Match the font size of form elements */
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+    display: block;
+    width: auto;
+}
+
+.add-question-btn:hover {
+    background-color: #0056b3; /* Darker on hover */
+}
+
+/* Question input styling */
+.question-input {
+    margin-bottom: 10px;
+}
+
+.upload-form, .document-list {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.upload-form input[type="file"] {
+    margin-bottom: 10px;
+}
+
+.document-list h3 {
+    margin-bottom: 10px;
+}
+
+.document-list a {
+    display: block;
+    margin: 5px 0;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.document-list a:hover {
+    text-decoration: underline;
+}
+.alert {
+    margin: 1rem 0;
+    padding: 0.6rem;
+    font-size: 1rem;
+    border-radius: 5px;
+}
